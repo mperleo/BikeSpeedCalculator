@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PI, SpeedRegistry, UNITS } from './app.component.config';
+import { LANGUAJES, PI, UNITS } from '../emuns';
+import { SpeedRegistry } from 'src/interfaces/SpeedRegistry';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,15 @@ import { PI, SpeedRegistry, UNITS } from './app.component.config';
 })
 export class AppComponent implements OnInit{
   public title: string = 'bikeSpeedCalculador';
+  public lang: string = LANGUAJES.ES;
 
   public unit: string = 'mm';
 
   public distancePerStroke: number = 0;
   public speedCalculated: number = 0;
 
-  public dientesPinon: number = 11;
-  public dientesPlato: number = 50;
+  public sprocketTeeth: number = 11;
+  public chainringTeeth: number = 50;
   public diameter: number = 700;
   public cadence: number = 60;
 
@@ -24,8 +26,8 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {}
 
   public onReset(): void {
-    this.dientesPinon = 0;
-    this.dientesPlato = 0;
+    this.sprocketTeeth = 0;
+    this.chainringTeeth = 0;
     this.diameter = 0;
     this.cadence = 0;
   }
@@ -33,18 +35,22 @@ export class AppComponent implements OnInit{
   public onCalculateSpeed(): void{
     const diameterInMM = this.unitConverter(this.diameter, this.unit);
     console.log(this.diameter);
-    this.distancePerStroke = (PI * diameterInMM * this.dientesPlato) / this.dientesPinon;
+    this.distancePerStroke = (PI * diameterInMM * this.chainringTeeth) / this.sprocketTeeth;
     this.speedCalculated = (this.cadence * 60 * this.distancePerStroke) / 1000;
 
     const newCalc: SpeedRegistry = {
       distancePerStroke: this.distancePerStroke,
       speedCalculated: this.speedCalculated,
-      dientesPinon: this.dientesPinon,
-      dientesPlato: this.dientesPlato,
+      sprocketTeeth: this.sprocketTeeth,
+      chainringTeeth: this.chainringTeeth,
       cadence: this.cadence,
       diameter: this.diameter,
     }
     this.savedCalcs.push(newCalc);
+  }
+
+  public onChangeLang(newLang:string) {
+    this.lang = newLang;
   }
 
   private unitConverter(value: number, unit: string) : number{

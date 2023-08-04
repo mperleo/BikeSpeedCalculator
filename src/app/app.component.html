@@ -11,19 +11,19 @@
   <div class="row">
     <div class="col-md-6 col-sm-12">
       <div class="card text-bg-light mb-3">
-        <div class="card-header">Indica los datos</div>
+        <div class="card-header">{{'formCardHeader' | translations:lang}}</div>
         <div class="card-body row">
 
           <div class="col-md-6">
             <mat-form-field appearance="fill" class="w-100">
-              <mat-label>Diámetro de la rueda</mat-label>
+              <mat-label>{{'wheelSizeLabel' | translations:lang}}</mat-label>
               <input matInput placeholder="700" [(ngModel)]="diameter">
             </mat-form-field>
           </div>
 
           <div class="col-md-6">
             <mat-form-field appearance="fill" class="w-100">
-              <mat-label>Unidad</mat-label>
+              <mat-label>{{'unitLabel' | translations:lang}}</mat-label>
               <mat-select [(ngModel)]="unit">
                 <mat-option selected value="mm">mm</mat-option>
                 <mat-option value="inch">inch</mat-option>
@@ -33,28 +33,28 @@
 
           <div class="col-md-6">
             <mat-form-field appearance="fill" class="w-100">
-              <mat-label>Dientes del plato</mat-label>
-              <input matInput placeholder="50" [(ngModel)]="dientesPlato">
+              <mat-label>{{'chainringTeethLabel' | translations:lang}}</mat-label>
+              <input matInput placeholder="50" [(ngModel)]="chainringTeeth">
             </mat-form-field>            
           </div>
 
           <div class="col-md-6">
             <mat-form-field appearance="fill" class="w-100">
-              <mat-label>Dientes del piñon</mat-label>
-              <input matInput placeholder="11" [(ngModel)]="dientesPinon">
+              <mat-label>{{'sprocketTeethLabel' | translations:lang}}</mat-label>
+              <input matInput placeholder="11" [(ngModel)]="sprocketTeeth">
             </mat-form-field>
           </div>
 
           <div class="col-md-6">
             <mat-form-field appearance="fill" class="w-100">
-              <mat-label>Cadencia</mat-label>
+              <mat-label>{{'cadenceLabel' | translations:lang}}</mat-label>
               <input matInput placeholder="60" [(ngModel)]="cadence">
             </mat-form-field>
           </div>
 
           <div class="col-md-12">
-            <button type="button" class="btn btn-dark" (click)="onCalculateSpeed()">Calcular</button>
-            <button type="button" class="btn btn-light" (click)="onReset()">Borrar datos</button>
+            <button type="button" class="btn btn-dark" (click)="onCalculateSpeed()">{{'calculateButton' | translations:lang}}</button>
+            <button type="button" class="btn btn-light" (click)="onReset()">{{'deleteFormButton' | translations:lang}}</button>
           </div>
         </div>
       </div>
@@ -62,36 +62,36 @@
 
     <div class="col-md-6 col-sm-12">
       <div class="card text-bg-dark mb-3">
-        <div class="card-header">Velocidad Calculada</div>
+        <div class="card-header">{{'resultsCardHeader' | translations:lang}}</div>
         <div class="card-body silkscreen">
           <p><span class="large-text">{{speedCalculated| number:'1.0-2'}}</span> km/h</p>
-          <p>Distancia por pedalada: </p>
+          <p>{{'distancePerSrokeLabel' | translations:lang}} </p>
           <p><span class="mid-text">{{distancePerStroke| number:'1.0-2'}}</span> m</p>
         </div>
       </div>
     </div>
 
-    <div class="col-12" *ngIf="savedCalcs.length > 0">
+    <div class="col-12 mb-5" *ngIf="savedCalcs.length > 0">
       <div class="card text-bg-dark mb-3">
-        <div class="card-header">Registros guardados</div>
+        <div class="card-header">{{'tableCardHeader' | translations:lang}}</div>
         <div class="card-body silkscreen">
 
           <table class="table table-bordered table-dark">
             <thead>
               <tr>
-                <th scope="col">Diámetro rueda</th>
-                <th scope="col">Dientes plato</th>
-                <th scope="col">Dientes piñon</th>
-                <th scope="col">Cadencia</th>
-                <th scope="col">Distancia por pedalada</th>
-                <th scope="col">Veolocidad</th>
+                <th scope="col">{{'wheelSizeLabel' | translations:lang}}</th>
+                <th scope="col">{{'chainringTeethLabel' | translations:lang}}</th>
+                <th scope="col">{{'sprocketTeethLabel' | translations:lang}}</th>
+                <th scope="col">{{'cadenceLabel' | translations:lang}}</th>
+                <th scope="col">{{'distancePerSrokeLabel' | translations:lang}}</th>
+                <th scope="col">{{'speedLabel' | translations:lang}}</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let calc of savedCalcs">
                 <td>{{calc.diameter}}</td>
-                <td>{{calc.dientesPlato}}</td>
-                <td>{{calc.dientesPinon}}</td>
+                <td>{{calc.chainringTeeth}}</td>
+                <td>{{calc.sprocketTeeth}}</td>
                 <td>{{calc.cadence}}</td>
                 <td>{{calc.distancePerStroke| number:'1.0-2'}}</td>
                 <td>{{calc.speedCalculated| number:'1.0-2'}}</td>
@@ -105,15 +105,19 @@
   </div>
 </div>
 
-<footer class=" my-3 pt-2 px-3 row text-bg-dark">
-    <div class="col-md-8 col-sm-12 pt-2">
-      <p class="silkscreen text-white">Created by 
-        <a class="text-white" href="https://mperleo.github.io/MykiDashboard/" role="button">MykiStudio.</a>
-        <a class="mx-3 text-white" href="https://github.com/mperleo" role="button">
-          <i class="fab fa-github"></i>
-        </a>
-      </p>
-    </div>
-    
-      
-  </footer>
+<footer class="mt-5 pt-2 px-3 row text-bg-dark fixed-bottom">
+  <div class="col-md-10 col-sm-12 pt-2">
+    <p class="silkscreen text-white">{{'credits' | translations:lang}}
+      <a class="text-white" href="https://mperleo.github.io/MykiDashboard/" role="button">MykiStudio.</a>
+      <a class="mx-3 text-white" href="https://github.com/mperleo" role="button">
+        <i class="fab fa-github"></i>
+      </a>
+    </p>
+  </div>  
+  <div class="col-md-2 col-sm-12 pt-2">
+    <p class="silkscreen text-white">
+      <a class="mx-3 text-white" (click)="onChangeLang('es')">ESPAÑOL</a>
+      <a class="mx-3 text-white"  (click)="onChangeLang('en')">ENGLISH</a>
+    </p>
+  </div>
+</footer>
